@@ -1,0 +1,45 @@
+.header {
+  background-color: transparent;
+  width: 1140px;
+  height: 74px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.header__logo-container {
+  width: 38px;
+  padding: 19px;
+}
+
+.header__logo {
+  height: 38px;
+  width: 38px;
+}
+
+.header__btn-container {
+  width: 184px;
+  display: flex;
+  padding: 21px;
+}
+
+.header__button {
+  padding: 0;
+  background-color: transparent;
+  width: 77px;
+  height: 32px;
+  color: white;
+  border: none;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.header__button_type_signin {
+  color: black;
+  background-color: #3ddc84;
+  border: solid 1px black;
+  border-radius: 3px;
+  margin-left: 30px;
+}

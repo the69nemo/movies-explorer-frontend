@@ -1,0 +1,28 @@
+.promo {
+  background-color: #073042;
+  box-sizing: border-box;
+  color: white;
+  margin-top: -74px;
+  padding-top: 74px;
+  height: 598px;
+}
+
+.promo__container {
+  background: url(../../images/pic__COLOR_landing-logo.svg) no-repeat center;
+  max-width: 1140px;
+  height: 524px;
+  margin: 0 auto;
+}
+
+.promo__title {
+  padding: 0;
+  margin: 0 auto;
+  padding-top: 184px;
+  text-align: center;
+  height: 116px;
+  width: 730px;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  letter-spacing: -0.04em;
+}

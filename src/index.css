@@ -1,0 +1,10 @@
+@import url(../src/vendor/normalize.css);
+@import url(../src/vendor/fonts/fonts.css);
+
+#root {
+  background-color: #202020;
+  height: 100vh;
+  margin: 0 auto;
+  box-sizing: border-box;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+}
