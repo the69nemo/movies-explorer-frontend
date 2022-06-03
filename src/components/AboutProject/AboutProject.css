@@ -1,0 +1,110 @@
+.aboutproject {
+  max-width: 1140px;
+  box-sizing: border-box;
+  padding: 110px 0;
+  margin: 0 auto;
+}
+
+.aboutproject__title {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 23px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+}
+
+.aboutproject__line {
+  border: solid 1px #dadada;
+  height: 0;
+  margin-bottom: 70px;
+}
+
+.aboutproject__container {
+  display: grid;
+  grid-template-rows: 50px 150px repeat(2, 40px);
+  grid-template-columns: repeat(2, 228px) repeat(2, 114px)  228px 208px 20px;
+  color: #ffffff;
+  grid-template-areas:
+    "title1 title1 title1 title2 title2 title2 ."
+    "subtitle1 subtitle1 subtitle1 subtitle2 subtitle2 subtitle2 ."
+    "timeline1 timeline2 timeline2 timeline2 timeline2 timeline2 timeline2"
+    "subtimeline1 subtimeline2 subtimeline2 subtimeline2 subtimeline2 subtimeline2 subtimeline2";
+}
+
+.aboutproject__text-title {
+  margin: 0;
+  padding: 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.04em;
+}
+
+.aboutproject__text-title_type_title1 {
+  grid-area: title1;
+}
+
+.aboutproject__text-title_type_title2 {
+  grid-area: title2;
+}
+
+.aboutproject__text-subtitle {
+  margin: 0;
+  padding: 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.aboutproject__text-title_type_subtitle1 {
+  grid-area: subtitle1;
+}
+
+.aboutproject__text-title_type_subtitle2 {
+  grid-area: subtitle2;
+}
+
+.aboutproject__timeline {
+  display: flex;
+  align-items: center;
+}
+
+.aboutproject__timeline_type_timelin1 {
+  grid-area: timeline1;
+  color: #000000;
+  background-color: #3ddc84;
+}
+
+.aboutproject__timeline_type_timelin2 {
+  grid-area: timeline2;
+  background-color: #303030;
+}
+
+.aboutproject__timeline-subtitle {
+  display: flex;
+  align-items: center;
+  color: #8b8b8b;
+}
+
+.aboutproject__timeline_type_subtimelin1 {
+  grid-area: subtimeline1;
+}
+
+.aboutproject__timeline_type_subtimelin2 {
+  grid-area: subtimeline2;
+}
+
+.aboutproject__timeline-text {
+  margin: 0 auto;
+  padding: 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+}
