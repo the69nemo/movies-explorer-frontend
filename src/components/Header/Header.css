@@ -6,6 +6,7 @@
   flex-direction: row;
   justify-content: space-between;
   margin: 0 auto;
+  z-index: 5;
 }
 
 .header__logo-container {

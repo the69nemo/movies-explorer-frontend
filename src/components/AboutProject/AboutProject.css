@@ -1,14 +1,13 @@
-.aboutproject {
-  max-width: 1140px;
+.about-project {
+  width: 1140px;
   box-sizing: border-box;
-  padding: 110px 0;
+  padding: 0;
   margin: 0 auto;
 }
 
-.aboutproject__title {
+.about-project__title {
   padding: 0;
-  margin: 0;
-  margin-bottom: 23px;
+  margin:  110px 0 23px;
   font-style: normal;
   font-weight: 400;
   font-size: 22px;
@@ -17,14 +16,16 @@
   color: #ffffff;
 }
 
-.aboutproject__line {
+.about-project__line {
+  width: 1140px;
   border: solid 1px #dadada;
   height: 0;
   margin-bottom: 70px;
 }
 
-.aboutproject__container {
+.about-project__container {
   display: grid;
+  margin-bottom: 110px;
   grid-template-rows: 50px 150px repeat(2, 40px);
   grid-template-columns: repeat(2, 228px) repeat(2, 114px)  228px 208px 20px;
   color: #ffffff;
@@ -35,7 +36,7 @@
     "subtimeline1 subtimeline2 subtimeline2 subtimeline2 subtimeline2 subtimeline2 subtimeline2";
 }
 
-.aboutproject__text-title {
+.about-project__text-title {
   margin: 0;
   padding: 0;
   font-style: normal;
@@ -45,15 +46,15 @@
   letter-spacing: -0.04em;
 }
 
-.aboutproject__text-title_type_title1 {
+.about-project__text-title_type_title1 {
   grid-area: title1;
 }
 
-.aboutproject__text-title_type_title2 {
+.about-project__text-title_type_title2 {
   grid-area: title2;
 }
 
-.aboutproject__text-subtitle {
+.about-project__text-subtitle {
   margin: 0;
   padding: 0;
   font-style: normal;
@@ -62,45 +63,45 @@
   line-height: 20px;
 }
 
-.aboutproject__text-title_type_subtitle1 {
+.about-project__text-title_type_subtitle1 {
   grid-area: subtitle1;
 }
 
-.aboutproject__text-title_type_subtitle2 {
+.about-project__text-title_type_subtitle2 {
   grid-area: subtitle2;
 }
 
-.aboutproject__timeline {
+.about-project__timeline {
   display: flex;
   align-items: center;
 }
 
-.aboutproject__timeline_type_timelin1 {
+.about-project__timeline_type_timelin1 {
   grid-area: timeline1;
   color: #000000;
   background-color: #3ddc84;
 }
 
-.aboutproject__timeline_type_timelin2 {
+.about-project__timeline_type_timelin2 {
   grid-area: timeline2;
   background-color: #303030;
 }
 
-.aboutproject__timeline-subtitle {
+.about-project__timeline-subtitle {
   display: flex;
   align-items: center;
   color: #8b8b8b;
 }
 
-.aboutproject__timeline_type_subtimelin1 {
+.about-project__timeline_type_subtimelin1 {
   grid-area: subtimeline1;
 }
 
-.aboutproject__timeline_type_subtimelin2 {
+.about-project__timeline_type_subtimelin2 {
   grid-area: subtimeline2;
 }
 
-.aboutproject__timeline-text {
+.about-project__timeline-text {
   margin: 0 auto;
   padding: 0;
   font-style: normal;
