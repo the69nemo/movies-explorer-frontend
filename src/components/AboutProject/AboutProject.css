@@ -1,5 +1,5 @@
 .about-project {
-  width: 1140px;
+  max-width: 1140px;
   box-sizing: border-box;
   padding: 0;
   margin: 0 auto;
@@ -7,7 +7,7 @@
 
 .about-project__title {
   padding: 0;
-  margin:  110px 0 23px;
+  margin: 110px 0 23px;
   font-style: normal;
   font-weight: 400;
   font-size: 22px;
@@ -17,7 +17,7 @@
 }
 
 .about-project__line {
-  width: 1140px;
+  width: 100%;
   border: solid 1px #dadada;
   height: 0;
   margin-bottom: 70px;
@@ -27,7 +27,7 @@
   display: grid;
   margin-bottom: 110px;
   grid-template-rows: 50px 150px repeat(2, 40px);
-  grid-template-columns: repeat(2, 228px) repeat(2, 114px)  228px 208px 20px;
+  grid-template-columns: repeat(2, 228px) repeat(2, 114px) 228px 208px 20px;
   color: #ffffff;
   grid-template-areas:
     "title1 title1 title1 title2 title2 title2 ."
@@ -108,4 +108,25 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
+}
+
+@media screen and (max-width: 1280px) {
+  .about-project {
+    max-width: 668px;
+  }
+
+  .about-project__title {
+    margin-top: 90px;
+  }
+
+  .about-project__container {
+    grid-template-columns: repeat(2, 134px) repeat(2, 67px) 134px 120px 12px;
+  }
+
+  .about-project__text-subtitle {
+    margin-top: 22px;
+    width: 319px;
+    font-size: 12px;
+    line-height: 18px;
+  }
 }

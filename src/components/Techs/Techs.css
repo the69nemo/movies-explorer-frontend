@@ -71,3 +71,9 @@
   line-height: 17px;
   letter-spacing: -0.04em;
 }
+
+@media screen and (max-width: 1280px) {
+  .techs__container {
+    max-width: 768px;
+  }
+}

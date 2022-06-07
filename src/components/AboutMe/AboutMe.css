@@ -21,6 +21,7 @@
   border: solid 1px #dadada;
   height: 0;
   margin-bottom: 70px;
+  width: 100%;
 }
 
 .about-me__container {
@@ -79,4 +80,47 @@
   font-size: 14px;
   line-height: 17px;
   color: #ffffff;
+  transition: opacity 0.3s linear;
+  text-decoration: none;
+}
+
+.about-me__social:hover {
+  opacity: 0.7;
+}
+
+@media screen and (max-width: 1280px) {
+  .about-me {
+    max-width: 668px;
+    padding: 90px 0 91px
+  }
+
+  .about-me__container {
+    grid-template-columns: 364px 255px;
+    grid-template-rows: 60px 38px 170px 39px;
+    column-gap: 49px;
+  }
+
+  .about-me__student-name {
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 40px;
+  }
+
+  .about-me__photo {
+    width: 255px;
+    height: 307px;
+  }
+
+  .about-me__subtitle, .about-me__discription {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about-me__line {
+    margin-bottom: 66px;
+  }
+
+  .about-me__social {
+    margin-top: 20px;
+  }
 }
