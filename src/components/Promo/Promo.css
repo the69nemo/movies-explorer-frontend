@@ -26,3 +26,22 @@
   line-height: 58px;
   letter-spacing: -0.04em;
 }
+
+@media screen and (max-width: 768px) {
+  .promo {
+    height: 644px;
+  }
+
+  .promo__container {
+    background-size: 248px;
+    max-width: 284px;
+    height: 570px;
+  }
+
+  .promo__title {
+    font-size: 31px;
+    line-height: 39px;
+    width: 300px;
+    padding-top: 227px;
+  }
+}

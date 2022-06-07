@@ -38,7 +38,8 @@
   cursor: pointer;
 }
 
-.header__button:hover, .header__link:hover {
+.header__button:hover,
+.header__link:hover {
   opacity: 0.8;
 }
 
@@ -57,5 +58,29 @@
 @media screen and (max-width: 1280px) {
   .header {
     max-width: 668px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    max-width: 292px;
+  }
+
+  .header__btn-container {
+    width: 132px;
+    padding: 0;
+    margin-top: 24px;
+  }
+
+  .header__logo-container {
+    margin-top: 18px;
+    padding: 0;
+  }
+
+  .header__button {
+    font-size: 10px;
+    line-height: 16px;
+    width: 54px;
+    height: 26px;
   }
 }

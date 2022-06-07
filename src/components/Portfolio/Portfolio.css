@@ -66,3 +66,25 @@
     font-size: 28px;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .portfolio {
+    max-width: 292px;
+  }
+
+  .portfolio__link {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .portfolio__icon {
+    width: 13px;
+    height: 13px;
+  }
+
+  .portfolio__wrapper {
+    margin-bottom: 70px;
+  }
+
+  
+}
