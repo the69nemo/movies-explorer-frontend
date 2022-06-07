@@ -21,7 +21,7 @@
 .header__btn-container {
   width: 184px;
   display: flex;
-  padding: 21px;
+  padding-top: 21px;
 }
 
 .header__button {
@@ -57,7 +57,7 @@
 
 @media screen and (max-width: 1280px) {
   .header {
-    max-width: 668px;
+    max-width: 708px;
   }
 }
 

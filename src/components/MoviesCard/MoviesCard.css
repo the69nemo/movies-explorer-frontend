@@ -1,0 +1,29 @@
+.movies-card {
+  max-width: 1140px;
+  background-color: #2F2F2F;
+  padding: 5px;
+  margin: 0 auto;
+}
+
+.movies-card__container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr minmax(220px, 300px);
+  row-gap: 40px;
+  justify-content: space-between;
+
+}
+
+.movies-card__text-wrapper {
+  grid-column: 1/2;
+  justify-self: left;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.movies-card__img-cover {
+  grid-column: 2/3;
+  width: 220px;
+  height: 122px;
+}

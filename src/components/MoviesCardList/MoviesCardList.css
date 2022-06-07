@@ -1,0 +1,18 @@
+.movies-list{
+  max-width: 1140px;
+}
+
+.movies-list__container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(auto-fit, minmax(134px, 1fr));
+  row-gap: 40px;
+}
+
+.movies-list__button {
+  width: 320px;
+  height: 36px;
+  background-color: #2F2F2F;
+  border-radius: 6px;
+  padding: 50px 0 80px;
+}
