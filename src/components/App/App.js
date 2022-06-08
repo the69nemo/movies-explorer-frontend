@@ -6,15 +6,19 @@ import PageNotFound from "../PageNotFound/PageNotFound";
 import Movies from "../Movies/Movies";
 import SaveMovies from "../SavedMovies/SavedMovies";
 import Register from "../Register/Register";
+import Login from "../Login/Login";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <div className="page">
       <Switch>
         <Route path="/signup">
           <Register />
+        </Route>
+        <Route path="/signin">
+          <Login />
         </Route>
         <Route path="/" exact>
           <Main isLoggedIn={isLoggedIn} />

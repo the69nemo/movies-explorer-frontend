@@ -42,7 +42,6 @@ function Register() {
               className="register__input register__input_type_password"
               type="password"
               required
-              minLength='2'
             />
             <span
               className="register__input-error"
