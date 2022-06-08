@@ -60,6 +60,10 @@
   transition: opacity 0.3s linear;
 }
 
+.movies-card__delete-btn {
+  background: url(../../images/icon__delete.svg) no-repeat center;
+}
+
 .movies-card__like-btn:hover {
   opacity: 0.8;
 }

@@ -6,25 +6,29 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import PageNotFound from "../PageNotFound/PageNotFound";
 import Movies from "../Movies/Movies";
+import SaveMovies from "../SavedMovies/SavedMovies";
 function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   return (
     <div className="page">
-      {isLoggedIn && <Header />}
+      <Header isLoggedIn={isLoggedIn} />
       <Switch>
         <Route path="/" exact>
           <Main />
         </Route>
-        <Route path="/movies" exact>
+        <Route path="/movies" >
           <Movies />
+        </Route>
+        <Route path="/saved-movies" >
+          <SaveMovies />
         </Route>
         <Route path="*">
           <PageNotFound />
         </Route>
       </Switch>
-      {isLoggedIn && <Footer />}
+      <Footer />
     </div>
   );
 }

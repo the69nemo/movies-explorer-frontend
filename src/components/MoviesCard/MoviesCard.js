@@ -1,7 +1,7 @@
 import React from "react";
 import "./MoviesCard.css";
 
-function MoviesCard({ cardName, imgCover, time }) {
+function MoviesCard({ cardName, imgCover, time, deleteIcon }) {
   return (
     <section className="movies-card">
       <div className="movies-card__container">
@@ -11,7 +11,7 @@ function MoviesCard({ cardName, imgCover, time }) {
             <p className="movies-card__time"> {time} </p>
           </div>
           <div className="movies-card__button-container">
-            <button className="movies-card__like-btn" type="button" />
+            <button className={deleteIcon ? 'movies-card__like-btn movies-card__delete-btn' : 'movies-card__like-btn'} type="button" />
           </div>
         </div>
         <img
