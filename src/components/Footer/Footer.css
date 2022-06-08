@@ -43,7 +43,7 @@
   padding: 0;
   list-style-type: none;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .footer_list:not(:last-child) {
