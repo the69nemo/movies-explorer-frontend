@@ -1,16 +1,15 @@
 .movies-list {
   max-width: 1140px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin: 0 auto;
 }
 
 .movies-list__container {
-  margin-bottom: 60px;
+  margin: 70px 0 60px;
 }
 
 .movies-list__button {
-  margin-bottom: 80px;
+  display: block;
+  margin: 0 auto 80px;
   width: 320px;
   height: 36px;
   background-color: #2F2F2F;
@@ -35,7 +34,7 @@
   }
 
   .movies-list__container {
-    margin-bottom: 80px;;
+    margin: 60px 0 80px;
   }
 }
 
@@ -45,7 +44,7 @@
   }
 
   .movies-list__container {
-    margin-bottom: 70px;
+    margin: 40px 0 70px;
   }
 
   .movies-list__button {

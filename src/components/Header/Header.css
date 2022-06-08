@@ -44,10 +44,18 @@
 }
 
 .header__button_type_movies {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
   width: 58px;
 }
 
 .header__button_type_saved-movies {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
   width: 153px;
   margin-left: 20px;
 }
@@ -58,6 +66,10 @@
   height: 32px;
   background-color: #313131;
   border-radius: 20px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
 }
 
 .header__button:hover,

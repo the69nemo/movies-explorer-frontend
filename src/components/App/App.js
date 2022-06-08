@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import "./App.css";
-import Main from "../Main/Main";
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
+import Main from "../Main/Main"
 import PageNotFound from "../PageNotFound/PageNotFound";
 import Movies from "../Movies/Movies";
 import SaveMovies from "../SavedMovies/SavedMovies";
@@ -13,22 +11,26 @@ function App() {
 
   return (
     <div className="page">
-      <Header isLoggedIn={isLoggedIn} />
       <Switch>
         <Route path="/" exact>
-          <Main />
+          <Main
+            isLoggedIn={isLoggedIn}
+          />
         </Route>
         <Route path="/movies" >
-          <Movies />
+          <Movies
+            isLoggedIn={isLoggedIn}
+          />
         </Route>
         <Route path="/saved-movies" >
-          <SaveMovies />
+          <SaveMovies
+            isLoggedIn={isLoggedIn}
+          />
         </Route>
         <Route path="*">
           <PageNotFound />
         </Route>
       </Switch>
-      <Footer />
     </div>
   );
 }
