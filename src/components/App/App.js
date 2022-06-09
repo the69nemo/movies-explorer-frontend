@@ -7,9 +7,10 @@ import Movies from "../Movies/Movies";
 import SaveMovies from "../SavedMovies/SavedMovies";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
+import Profile from "../Profile/Profile";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   return (
     <div className="page">
@@ -19,6 +20,9 @@ function App() {
         </Route>
         <Route path="/signin">
           <Login />
+        </Route>
+        <Route path="/profile">
+          <Profile isLoggedIn={isLoggedIn} />
         </Route>
         <Route path="/" exact>
           <Main isLoggedIn={isLoggedIn} />
