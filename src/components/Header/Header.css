@@ -25,10 +25,6 @@
   padding-top: 21px;
 }
 
-.header__btn-container_type_login {
-  width: 381px;
-}
-
 .header__button {
   padding: 0;
   background-color: transparent;
@@ -43,38 +39,8 @@
   cursor: pointer;
 }
 
-.header__button_type_movies {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 18px;
-  width: 58px;
-}
-
-.header__button_type_saved-movies {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 18px;
-  width: 153px;
-  margin-left: 20px;
-}
-
-.header__button_type_profile {
-  margin-left: 50px;
-  width: 100px;
-  height: 32px;
-  background-color: #313131;
-  border-radius: 20px;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 18px;
-}
-
 .header__button:hover,
-.header__link:hover,
-.header__burger-btn:hover {
+.header__link:hover {
   opacity: 0.8;
 }
 
@@ -90,31 +56,9 @@
   transition: opacity 0.3s linear;
 }
 
-.header__burger-btn {
-  visibility: hidden;
-  background-color: transparent;
-  height: 44px;
-  width: 44px;
-  background: url(../../images/icon__burger_btn.svg) no-repeat center;
-  cursor: pointer;
-  border: 0;
-  transition: opacity 0.3s linear;
-  position: absolute;
-  top: 15px;
-  right: 0px;
-}
-
 @media screen and (max-width: 1280px) {
   .header {
     max-width: 708px;
-  }
-
-  .header__btn-container_type_login {
-    visibility: hidden;
-  }
-
-  .header__burger-btn {
-    visibility: visible;
   }
 }
 

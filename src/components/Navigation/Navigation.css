@@ -1,0 +1,96 @@
+.navigation__btn-container {
+  width: 184px;
+  display: flex;
+  padding-top: 21px;
+}
+
+.navigation__btn-container_type_login {
+  width: 381px;
+}
+
+.navigation__button {
+  padding: 0;
+  background-color: transparent;
+  width: 77px;
+  height: 32px;
+  color: white;
+  border: none;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  transition: opacity 0.3s linear;
+  cursor: pointer;
+}
+
+.navigation__button_type_movies {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  width: 58px;
+}
+
+.navigation__button_type_saved-movies {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  width: 153px;
+  margin-left: 20px;
+}
+
+.navigation__button_type_profile {
+  margin-left: 50px;
+  width: 100px;
+  height: 32px;
+  background-color: #313131;
+  border-radius: 20px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.navigation__button:hover,
+.navigation__burger-btn:hover {
+  opacity: 0.8;
+}
+
+.navigation__burger-btn {
+  visibility: hidden;
+  background-color: transparent;
+  height: 44px;
+  width: 44px;
+  background: url(../../images/icon__burger_btn.svg) no-repeat center;
+  cursor: pointer;
+  border: 0;
+  transition: opacity 0.3s linear;
+  position: absolute;
+  top: 15px;
+  right: 0px;
+}
+
+@media screen and (max-width: 1280px) {
+  .navigation__btn-container_type_login {
+    visibility: hidden;
+  }
+
+  .navigation__burger-btn {
+    visibility: visible;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navigation__btn-container {
+    width: 132px;
+    padding: 0;
+    margin-top: 24px;
+  }
+
+  .navigation__button {
+    font-size: 10px;
+    line-height: 16px;
+    width: 54px;
+    height: 26px;
+  }
+}
