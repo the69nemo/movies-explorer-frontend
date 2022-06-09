@@ -10,7 +10,8 @@ import Login from "../Login/Login";
 import Profile from "../Profile/Profile";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
 
   return (
     <div className="page">
@@ -22,16 +23,24 @@ function App() {
           <Login />
         </Route>
         <Route path="/profile">
-          <Profile isLoggedIn={isLoggedIn} />
+          <Profile
+            isLoggedIn={isLoggedIn}
+          />
         </Route>
         <Route path="/" exact>
-          <Main isLoggedIn={isLoggedIn} />
+          <Main
+            isLoggedIn={isLoggedIn}
+          />
         </Route>
         <Route path="/movies">
-          <Movies isLoggedIn={isLoggedIn} />
+          <Movies
+            isLoggedIn={isLoggedIn}
+          />
         </Route>
         <Route path="/saved-movies">
-          <SaveMovies isLoggedIn={isLoggedIn} />
+          <SaveMovies
+            isLoggedIn={isLoggedIn}
+          />
         </Route>
         <Route path="*">
           <PageNotFound />

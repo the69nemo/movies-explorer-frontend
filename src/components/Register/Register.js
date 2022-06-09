@@ -17,6 +17,7 @@ function Register() {
             <input
               className="register__input register__input_type_name"
               type="text"
+              minLength="2"
               required
             />
             <span
@@ -41,6 +42,8 @@ function Register() {
             <input
               className="register__input register__input_type_password"
               type="password"
+              minLength="2"
+              maxLength="8"
               required
             />
             <span

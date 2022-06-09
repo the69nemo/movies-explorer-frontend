@@ -15,6 +15,7 @@ function Profile({ isLoggedIn }) {
               <input
                 className="profile__input profile__input_type_name"
                 type="text"
+                minLength="2"
                 required
               />
               <span

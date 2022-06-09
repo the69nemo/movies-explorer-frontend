@@ -1,11 +1,6 @@
 .navigation__btn-container {
-  width: 184px;
   display: flex;
   padding-top: 21px;
-}
-
-.navigation__btn-container_type_login {
-  width: 381px;
 }
 
 .navigation__button {
@@ -22,6 +17,15 @@
   cursor: pointer;
 }
 
+.navigation__nav-link {
+  margin-left: 20px;
+}
+
+.navigation__button_type_active {
+  height: 32px;
+  border-bottom: 1px solid #FFFFFF;
+}
+
 .navigation__button_type_movies {
   font-style: normal;
   font-weight: 400;
@@ -36,7 +40,6 @@
   font-size: 14px;
   line-height: 18px;
   width: 153px;
-  margin-left: 20px;
 }
 
 .navigation__button_type_profile {
@@ -71,7 +74,7 @@
 }
 
 @media screen and (max-width: 1280px) {
-  .navigation__btn-container_type_login {
+  .navigation__btn-container {
     visibility: hidden;
   }
 
@@ -81,12 +84,6 @@
 }
 
 @media screen and (max-width: 768px) {
-  .navigation__btn-container {
-    width: 132px;
-    padding: 0;
-    margin-top: 24px;
-  }
-
   .navigation__button {
     font-size: 10px;
     line-height: 16px;

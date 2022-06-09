@@ -25,6 +25,7 @@
   font-size: 14px;
   line-height: 18px;
   color: #FFFFFF;
+  outline: none;
 }
 
 .search-form__button {

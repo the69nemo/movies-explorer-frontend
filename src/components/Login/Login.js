@@ -26,6 +26,8 @@ function Login() {
             <input
               className="login__input login__input_type_password"
               type="password"
+              minLength="2"
+              maxLength="8"
               required
             />
             <span className="login__input-error" id="login-input-error"></span>
