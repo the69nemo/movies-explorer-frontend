@@ -170,7 +170,7 @@
   .register__link-text {
     position: fixed;
     margin: 0;
-    left: calc(37px + (102 - 37) * ((100vw - 320px) / (450 - 320)));
+    left: calc(66px + (131 - 66) * ((100vw - 320px) / (450 - 320)));
     bottom: 30px;
     margin: 0;
     font-size: 12px;
