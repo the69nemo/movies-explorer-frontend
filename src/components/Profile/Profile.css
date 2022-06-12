@@ -1,5 +1,4 @@
 .profile {
-  height: 100vh;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -8,6 +7,7 @@
 }
 
 .profile__container {
+  height: 100%;
   margin-top: 74px;
   max-width: 410px;
   display: flex;
@@ -81,7 +81,7 @@
 .profile__btn {
   display: inline;
   background-color: transparent;
-  border: 0ch;
+  border: 0;
   border-radius: 3px;
   font-style: normal;
   font-weight: 400;
@@ -112,13 +112,13 @@
   .profile__container {
     margin-top: 236px;
   }
+
+  .profile__btn_edit {
+    margin: 210px 0 16px;
+  }
 }
 
 @media screen and (max-width: 450px) {
-  .profile {
-    position: relative;;
-  }
-
   .profile__container {
     max-width: 260px;
     margin-top: 53px;
@@ -133,9 +133,7 @@
   }
 
   .profile__btn {
-    position: absolute;
-    padding: 0;
-    margin: 0;
+    position: fixed;
     font-size: 12px;
     line-height: 15px;
   }
@@ -148,6 +146,8 @@
   }
 
   .profile__btn_exit {
+    padding: 0;
+    margin: 0;
     bottom: 40px;
     left: 33.8%;
   }
