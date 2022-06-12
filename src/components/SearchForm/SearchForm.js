@@ -10,6 +10,7 @@ function SearchForm() {
         <button type="button" className="search-form__button" />
       </form>
       <FilterCheckbox />
+      <div className="search-form__line" />
     </section>
   );
 }
