@@ -1,14 +1,14 @@
 .about-project {
-  max-width: 1140px;
+  max-width: 1280px;
   box-sizing: border-box;
-  padding: 0;
+  padding: 110px 70px;
   margin: 0 auto;
   color: #ffffff;
 }
 
 .about-project__title {
   padding: 0;
-  margin: 110px 0 23px;
+  margin: 0 0 23px;
   font-style: normal;
   font-weight: 400;
   font-size: 22px;
@@ -17,7 +17,6 @@
 }
 
 .about-project__line {
-  width: 100%;
   border: solid 1px #dadada;
   height: 0;
   margin-bottom: 70px;
@@ -25,18 +24,13 @@
 
 .about-project__grid-container {
   display: grid;
-  margin: 110px 0;
+  margin: 110px 0 0;
   grid-template-rows: repeat(2, 40px);
   grid-template-columns: 228px 1fr;
 }
 
 .about-project__flex-container {
   display: flex;
-  flex-wrap: wrap;
-}
-
-.about-text-container {
-  width: 550px;
 }
 
 .about-text-container:not(:last-child) {
@@ -94,17 +88,9 @@
   line-height: 17px;
 }
 
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 768px) {
   .about-project {
-    max-width: 668px;
-  }
-
-  .about-project__title {
-    margin-top: 90px;
-  }
-
-  .about-text-container {
-    width: 319px;
+    padding: 90px 50px;
   }
 
   .about-text-container:not(:last-child) {
@@ -113,23 +99,37 @@
 
   .about-project__grid-container {
     grid-template-columns: 140px 1fr;
-    margin: 56px 0 93px;
+    margin: 93px 0 0;
+  }
+
+  .about-project__text-title {
+    margin-bottom: 22px;
   }
 
   .about-project__text-subtitle {
-    margin-top: 22px;
     font-size: 12px;
     line-height: 18px;
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 600px) {
+  .about-project__flex-container {
+    flex-wrap: wrap;
+  }
+
+  .about-text-container:not(:last-child) {
+    margin-right: 0;
+    margin-bottom: 56px;
+  }
+}
+
+@media screen and (max-width: 350px) {
   .about-project {
-    width: 284px;
+    padding: 70px 18px;
   }
 
   .about-project__title {
-    margin: 70px 0 28px;
+    margin-bottom: 28px;
     font-size: 18px;
     line-height: 22px;
   }
@@ -139,6 +139,7 @@
   }
 
   .about-project__text-title {
+    margin-bottom: 16px;
     font-size: 18px;
     line-height: 22px;
   }
@@ -150,7 +151,7 @@
 
   .about-project__grid-container {
     grid-template-columns: 100px 1fr;
-    margin: 60px 0 70px;
+    margin: 60px 0 0;
   }
 
   .about-project__timeline-text {

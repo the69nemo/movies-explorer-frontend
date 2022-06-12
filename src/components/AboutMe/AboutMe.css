@@ -1,9 +1,15 @@
 .about-me {
-  max-width: 1140px;
   margin: 0 auto;
   color: #ffffff;
   box-sizing: border-box;
-  padding: 110px 0 100px;
+  padding: 110px 70px 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-me__wrapper {
+  max-width: 1140px;
 }
 
 .about-me__title {
@@ -26,17 +32,20 @@
 
 .about-me__container {
   display: grid;
-  grid-template-columns: 600px 270px;
-  grid-template-rows: repeat(auto-fit, minmax(18px, 1fr));
+  grid-template-columns: 1fr 270px;
   column-gap: 270px;
 }
 
 .about-me__photo {
   grid-row: 1/5;
   grid-column: 2/3;
-  width: 270px;
   height: 327px;
   border-radius: 10px;
+}
+
+about-me__text-wrapper {
+  display: flex;
+  flex-direction: column;
 }
 
 .about-me__student-name {
@@ -71,7 +80,7 @@
 
 .about-me__social-wrapper {
   display: flex;
-  padding-top: 99px;
+  padding-top: 79px;
 }
 
 .about-me__social {
@@ -91,15 +100,23 @@
   opacity: 0.7;
 }
 
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1140px) {
+  .about-me__container {
+    column-gap: calc(49px + (270 - 49) * ((100vw - 768px) / (1280 - 768)));
+  }
+
+  .about-me__social-wrapper {
+    padding-top: calc(25px + (79 - 25) * ((100vw - 768px) / (1280 - 768)));
+  }
+}
+
+@media screen and (max-width: 768px) {
   .about-me {
-    max-width: 668px;
-    padding: 90px 0 91px;
+    padding: 90px 50px;
   }
 
   .about-me__container {
-    grid-template-columns: 364px 255px;
-
+    grid-template-columns: 1fr 255px;
     column-gap: 49px;
   }
 
@@ -110,14 +127,20 @@
   }
 
   .about-me__photo {
-    width: 255px;
     height: 307px;
+    object-fit: cover;
   }
 
-  .about-me__subtitle,
+  .about-me__subtitle {
+    font-size: 12px;
+    line-height: 18px;
+    padding-top: 16px;
+  }
+
   .about-me__discription {
     font-size: 12px;
     line-height: 18px;
+    padding-top: 20px;
   }
 
   .about-me__line {
@@ -125,51 +148,71 @@
   }
 
   .about-me__social-wrapper {
-    padding-top: 20px;
+    padding-top: 49px;
   }
 }
 
-@media screen and (max-width: 768px) {
-  .about-me {
-    max-width: 292px;
-    padding: 70px 0 69px;
-  }
-
+@media screen and (max-width: 570px) {
   .about-me__container {
-    grid-template-columns: 292px;
-
+    grid-template-columns: 1fr;
   }
 
   .about-me__photo {
-    width: 292px;
     height: 352px;
     grid-row: 1/2;
-    grid-column: 1/2;
+    grid-column: 1;
+  }
+
+  .about-me__text-wrapper {
+    grid-row: 2/3;
+    grid-column: 1;
+  }
+
+  .about-me__social-wrapper {
+    grid-row: 3/4;
+    grid-column: 1;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .about-me {
+    padding: 70px 14px 69px;
+  }
+
+  .about-me__title {
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 28px;
+  }
+
+  .about-me__line {
+    margin-bottom: 60px;
+  }
+
+  .about-me__photo {
+    height: 352px;
+    width: 292px;
   }
 
   .about-me__student-name {
-    grid-row: 2/3;
     padding-top: 40px;
     font-size: 30px;
     line-height: 36px;
   }
 
   .about-me__subtitle {
-    grid-row: 3/4;
     padding-top: 20px;
     font-size: 11px;
     line-height: 16px;
   }
 
   .about-me__discription {
-    grid-row: 4/5;
     padding-top: 20px;
     font-size: 11px;
     line-height: 16px;
   }
 
   .about-me__social-wrapper {
-    grid-row: 5/6;
     padding-top: 40px;
   }
 

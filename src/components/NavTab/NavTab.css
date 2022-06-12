@@ -35,8 +35,14 @@
 
 @media screen and (max-width: 768px) {
   .navtab__container {
-    max-width: 284px;
     padding: 0;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .navtab__link {
+    font-size: 11px;
+    line-height: 16px;
   }
 
   .navtab__list:not(:last-child) {

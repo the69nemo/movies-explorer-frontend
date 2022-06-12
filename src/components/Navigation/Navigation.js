@@ -36,8 +36,8 @@ function Navigation() {
             Аккаунт
           </button>
         </NavLink>
-        <button className="navigation__burger-btn" type="button" onClick={handleBurgerMenuClick}></button>
       </nav>
+      <button className="navigation__burger-btn" type="button" onClick={handleBurgerMenuClick}></button>
       <BurgerMenu
         isOpen={isBurgerMenuOpen}
         isClose={handleBurgerMenuClick}

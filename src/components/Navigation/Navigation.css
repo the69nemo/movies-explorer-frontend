@@ -1,6 +1,7 @@
 .navigation__btn-container {
   display: flex;
-  padding-top: 21px;
+  align-items: center;
+  justify-content: center;
 }
 
 .navigation__button {
@@ -70,24 +71,28 @@
   transition: opacity 0.3s linear;
   position: absolute;
   top: 15px;
-  right: 0px;
+  right: 30px;
 }
 
-@media screen and (max-width: 1280px) {
+
+@media screen and (max-width: 768px) {
   .navigation__btn-container {
-    visibility: hidden;
+    display: none;
   }
 
   .navigation__burger-btn {
     visibility: visible;
   }
+
+  .navigation__burger-btn {
+    width: 40px;
+    height: 43px;
+  }
 }
 
-@media screen and (max-width: 768px) {
-  .navigation__button {
-    font-size: 10px;
-    line-height: 16px;
-    width: 54px;
-    height: 26px;
+@media screen and (max-width: 350px) {
+  .navigation__burger-btn {
+    top: 15px;
+    right: 14px;
   }
 }

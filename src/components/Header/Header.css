@@ -1,17 +1,21 @@
 .header {
   background-color: transparent;
-  max-width: 1140px;
+  max-width: 1280px;
   height: 74px;
-  display: flex;
-  justify-content: space-between;
   margin: 0 auto;
   z-index: 5;
   position: relative;
 }
 
+.header__container {
+  display: flex;
+  justify-content: space-between;
+  padding: 18px 70px;
+}
+
 .header__logo-container {
   width: 38px;
-  padding: 19px;
+  height: 38px;
 }
 
 .header__logo {
@@ -20,16 +24,14 @@
 }
 
 .header__btn-container {
-  width: 184px;
   display: flex;
-  padding-top: 21px;
+  align-items: center;
+  justify-content: center;
 }
 
 .header__button {
   padding: 0;
   background-color: transparent;
-  width: 77px;
-  height: 32px;
   color: white;
   border: none;
   font-weight: 500;
@@ -50,37 +52,32 @@
   border: solid 1px black;
   border-radius: 3px;
   margin-left: 30px;
+  width: 77px;
+  height: 32px;
 }
 
 .header__link {
   transition: opacity 0.3s linear;
 }
 
-@media screen and (max-width: 1280px) {
-  .header {
-    max-width: 708px;
+@media screen and (max-width: 769px) {
+  .header__container {
+    padding: 18px 30px;
   }
 }
 
-@media screen and (max-width: 768px) {
-  .header {
-    max-width: 292px;
-  }
-
-  .header__btn-container {
-    width: 132px;
-    padding: 0;
-    margin-top: 24px;
-  }
-
-  .header__logo-container {
-    margin-top: 18px;
-    padding: 0;
+@media screen and (max-width: 415px) {
+  .header__container {
+    padding: 18px 14px;
   }
 
   .header__button {
     font-size: 10px;
     line-height: 16px;
+
+  }
+  .header__button_type_signin {
+    margin-left: 14px;
     width: 54px;
     height: 26px;
   }
