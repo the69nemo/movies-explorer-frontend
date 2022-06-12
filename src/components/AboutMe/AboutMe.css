@@ -166,6 +166,7 @@ about-me__text-wrapper {
   .about-me__text-wrapper {
     grid-row: 2/3;
     grid-column: 1;
+    margin-top: 40px;
   }
 
   .about-me__social-wrapper {
@@ -195,7 +196,6 @@ about-me__text-wrapper {
   }
 
   .about-me__student-name {
-    padding-top: 40px;
     font-size: 30px;
     line-height: 36px;
   }
