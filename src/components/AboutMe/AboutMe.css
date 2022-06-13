@@ -1,0 +1,222 @@
+.about-me {
+  margin: 0 auto;
+  color: #ffffff;
+  box-sizing: border-box;
+  padding: 110px 70px 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-me__wrapper {
+  max-width: 1140px;
+}
+
+.about-me__title {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 23px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+}
+
+.about-me__line {
+  border: solid 1px #dadada;
+  height: 0;
+  margin-bottom: 70px;
+  width: 100%;
+}
+
+.about-me__container {
+  display: grid;
+  grid-template-columns: 1fr 270px;
+  column-gap: 270px;
+}
+
+.about-me__photo {
+  grid-row: 1/5;
+  grid-column: 2/3;
+  height: 327px;
+  border-radius: 10px;
+}
+
+about-me__text-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-me__student-name {
+  padding: 0;
+  margin: 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  letter-spacing: -0.04em;
+}
+
+.about-me__subtitle {
+  padding: 0;
+  margin: 0;
+  padding-top: 18px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+}
+
+.about-me__discription {
+  padding: 0;
+  margin: 0;
+  padding-top: 26px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.about-me__social-wrapper {
+  display: flex;
+  padding-top: 79px;
+}
+
+.about-me__social {
+  margin: 0;
+  padding: 0;
+  margin-right: 20px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #ffffff;
+  transition: opacity 0.3s linear;
+  text-decoration: none;
+}
+
+.about-me__social:hover {
+  opacity: 0.7;
+}
+
+@media screen and (max-width: 1140px) {
+  .about-me__container {
+    column-gap: calc(49px + (270 - 49) * ((100vw - 768px) / (1280 - 768)));
+  }
+
+  .about-me__social-wrapper {
+    padding-top: calc(25px + (79 - 25) * ((100vw - 768px) / (1280 - 768)));
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .about-me {
+    padding: 90px 50px;
+  }
+
+  .about-me__container {
+    grid-template-columns: 1fr 255px;
+    column-gap: 49px;
+  }
+
+  .about-me__student-name {
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 40px;
+  }
+
+  .about-me__photo {
+    height: 307px;
+    object-fit: cover;
+  }
+
+  .about-me__subtitle {
+    font-size: 12px;
+    line-height: 18px;
+    padding-top: 16px;
+  }
+
+  .about-me__discription {
+    font-size: 12px;
+    line-height: 18px;
+    padding-top: 20px;
+  }
+
+  .about-me__line {
+    margin-bottom: 66px;
+  }
+
+  .about-me__social-wrapper {
+    padding-top: 49px;
+  }
+}
+
+@media screen and (max-width: 570px) {
+  .about-me__container {
+    grid-template-columns: 1fr;
+  }
+
+  .about-me__photo {
+    height: 352px;
+    grid-row: 1/2;
+    grid-column: 1;
+  }
+
+  .about-me__text-wrapper {
+    grid-row: 2/3;
+    grid-column: 1;
+    margin-top: 40px;
+  }
+
+  .about-me__social-wrapper {
+    grid-row: 3/4;
+    grid-column: 1;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .about-me {
+    padding: 70px 14px 69px;
+  }
+
+  .about-me__title {
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 28px;
+  }
+
+  .about-me__line {
+    margin-bottom: 60px;
+  }
+
+  .about-me__photo {
+    height: 352px;
+    width: 292px;
+  }
+
+  .about-me__student-name {
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  .about-me__subtitle {
+    padding-top: 20px;
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .about-me__discription {
+    padding-top: 20px;
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .about-me__social-wrapper {
+    padding-top: 20px;
+  }
+
+  .about-me__social {
+    margin-right: 26px;
+  }
+}

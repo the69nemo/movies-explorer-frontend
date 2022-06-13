@@ -1,0 +1,159 @@
+.techs {
+  box-sizing: border-box;
+  padding: 86px 70px 100px;
+  background: #272727;
+  color: #ffffff;
+}
+
+.techs__container {
+  max-width: 1140px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.techs__title {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 23px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+}
+
+.techs__line {
+  border: solid 1px #dadada;
+  height: 0;
+  margin-bottom: 90px;
+}
+
+.techs__text-title {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 26px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  text-align: center;
+  letter-spacing: -0.04em;
+}
+
+.techs__text-subtitle {
+  margin: 0 auto 100px;
+  max-width: 460px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  letter-spacing: -0.04em;
+}
+
+.techs__grid-wrapper {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fit, 90px);
+  grid-template-rows: repeat(auto-fit, 1fr);
+  justify-content: center;
+}
+
+.techs__list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  background-color: #303030;
+  border-radius: 10px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: -0.04em;
+}
+
+@media screen and (max-width: 850px) {
+  .techs__grid-wrapper {
+    grid-template-columns: repeat(auto-fit, 84px);
+  }
+
+  .techs__list {
+    height: 57px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
+
+@media screen and (max-width: 810px) {
+  .techs__line {
+    margin-bottom: 80px;
+  }
+
+  .techs__text-title {
+    margin-bottom: 22px;
+  }
+
+  .techs__text-subtitle {
+    margin-bottom: 83px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .techs {
+    padding: 76px 50px 90px;
+  }
+
+  .techs__container {
+    max-width: 668px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .techs__text-title {
+    font-size: 40px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .techs {
+    padding: 48px 0 70px;
+    background: transparent;
+  }
+
+  .techs__container {
+    max-width: 284px;
+  }
+
+  .techs__grid-wrapper {
+    grid-template-columns: repeat(2, 84px);
+  }
+
+  .techs__title {
+    margin-bottom: 28px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .techs__line {
+    margin-bottom: 58px;
+  }
+
+  .techs__text-title {
+    margin-bottom: 24px;
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  .techs__text-subtitle {
+    margin-bottom: 50px;
+    font-size: 11px;
+    line-height: 16px;
+  }
+}

@@ -1,0 +1,98 @@
+.navigation__btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navigation__button {
+  padding: 0;
+  background-color: transparent;
+  width: 77px;
+  height: 32px;
+  color: white;
+  border: none;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  transition: opacity 0.3s linear;
+  cursor: pointer;
+}
+
+.navigation__nav-link {
+  margin-left: 20px;
+}
+
+.navigation__button_type_active {
+  height: 32px;
+  border-bottom: 1px solid #FFFFFF;
+}
+
+.navigation__button_type_movies {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  width: 58px;
+}
+
+.navigation__button_type_saved-movies {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  width: 153px;
+}
+
+.navigation__button_type_profile {
+  margin-left: 50px;
+  width: 100px;
+  height: 32px;
+  background-color: #313131;
+  border-radius: 20px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.navigation__button:hover,
+.navigation__burger-btn:hover {
+  opacity: 0.8;
+}
+
+.navigation__burger-btn {
+  visibility: hidden;
+  background-color: transparent;
+  height: 44px;
+  width: 44px;
+  background: url(../../images/icon__burger_btn.svg) no-repeat center;
+  cursor: pointer;
+  border: 0;
+  transition: opacity 0.3s linear;
+  position: absolute;
+  top: 15px;
+  right: 30px;
+}
+
+
+@media screen and (max-width: 768px) {
+  .navigation__btn-container {
+    display: none;
+  }
+
+  .navigation__burger-btn {
+    visibility: visible;
+  }
+
+  .navigation__burger-btn {
+    width: 40px;
+    height: 43px;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .navigation__burger-btn {
+    top: 15px;
+    right: 14px;
+  }
+}
