@@ -77,12 +77,17 @@
 }
 
 .login__input-error {
+  visibility: hidden;
   padding-top: 6px;
   font-style: normal;
   font-weight: 400;
   font-size: 10px;
   line-height: 12px;
   color: #ee3465;
+}
+
+.register__input-error_active {
+  visibility: visible;
 }
 
 .login__btn {
