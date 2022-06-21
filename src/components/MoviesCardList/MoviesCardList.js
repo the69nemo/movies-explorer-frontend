@@ -1,62 +1,83 @@
-import React from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
-import Cover1 from "../../images/movie_pic_1.jpg";
-import Cover2 from "../../images/movie_pic_2.jpg";
-import Cover3 from "../../images/movie_pic_3.jpg";
-import Cover4 from "../../images/movie_pic_4.jpg";
-import Cover5 from "../../images/movie_pic_5.jpg";
-import Cover6 from "../../images/movie_pic_6.jpg";
-import Cover7 from "../../images/movie_pic_7.jpg";
+import { MOBILE_WIDTH } from "../../utils/constants";
 
-function MoviesCardList({ hiddenButton, deleteIcon }) {
+function MoviesCardList({
+  hiddenButton,
+  movies,
+  onSave,
+  onDelete,
+  savedMovies,
+  notFoundMessage
+}) {
+  const [currentCards, setCurrentCards] = useState(0);
+  const [addCards, setAddCards] = useState(7);
+  const [moviesToShow, setMoviesToShow] = useState([]);
+
+  const getCards = (windowSize) => {
+    if (windowSize > MOBILE_WIDTH) {
+      return { first: 7, extra: 7 };
+    }
+    return { first: 5, extra: 1 };
+  };
+
+  const renderAddCards = useCallback(() => {
+    const count = Math.min(movies.length, currentCards + addCards);
+    const moreCards = movies.slice(currentCards, count);
+    setMoviesToShow([...moviesToShow, ...moreCards]);
+    setCurrentCards(count);
+  }, [currentCards, addCards, movies, moviesToShow]);
+
+  const resize = useCallback(() => {
+    const windowSize = window.innerWidth;
+    setAddCards(getCards(windowSize));
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("resize", resize);
+
+    return () => {
+      window.removeEventListener("resize", resize);
+    };
+  }, [resize]);
+
+  useEffect(() => {
+    const windowSize = window.innerWidth;
+    setAddCards(getCards(windowSize).extra);
+    const count = Math.min(movies.length, getCards(windowSize).first);
+    setMoviesToShow(movies.slice(0, count));
+    setCurrentCards(count);
+  }, [movies]);
+
+  const renderMovies = useCallback(() => {
+    renderAddCards();
+  }, [renderAddCards]);
+
   return (
     <section className="movies-list">
       <div className="movies-list__container">
-        <MoviesCard
-          cardName="33 слова о дизайне"
-          time="1ч 42м"
-          imgCover={Cover1}
-          deleteIcon={deleteIcon}
-        />
-        <MoviesCard
-          cardName="Киноальманах «100 лет дизайна»"
-          time="1ч 42м"
-          imgCover={Cover2}
-          deleteIcon={deleteIcon}
-        />
-        <MoviesCard
-          cardName="В погоне за Бенкси"
-          time="1ч 42м"
-          imgCover={Cover3}
-          deleteIcon={deleteIcon}
-        />
-        <MoviesCard
-          cardName="Баския: Взрыв реальности"
-          time="1ч 42м"
-          imgCover={Cover4}
-          deleteIcon={deleteIcon}
-        />
-        <MoviesCard
-          cardName="Бег это свобода"
-          time="1ч 42м"
-          imgCover={Cover5}
-          deleteIcon={deleteIcon}
-        />
-        <MoviesCard
-          cardName="Книготорговцы"
-          time="1ч 42м"
-          imgCover={Cover6}
-          deleteIcon={deleteIcon}
-        />
-        <MoviesCard
-          cardName="Когда я думаю о Германии ночью"
-          time="1ч 42м"
-          imgCover={Cover7}
-          deleteIcon={deleteIcon}
-        />
+        {movies.length ? (
+          moviesToShow.map((movie) => (
+            <MoviesCard
+              movie={movie}
+              onSave={onSave}
+              onDelete={onDelete}
+              savedMovies={savedMovies}
+              key={movie._id}
+            />
+          ))
+        ) : (
+          <h2 className="movies-list__not-found-text">{notFoundMessage}</h2>
+        )}
       </div>
-      <button type="button" className={!hiddenButton ? 'movies-list__button' : 'movies-list__button_hidden'}>
+      <button
+        type="button"
+        onClick={renderMovies}
+        className={
+          !hiddenButton ? "movies-list__button" : "movies-list__button_hidden"
+        }
+      >
         Еще
       </button>
     </section>

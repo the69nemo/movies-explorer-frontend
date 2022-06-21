@@ -69,6 +69,7 @@
 }
 
 .profile__input-error {
+  visibility: hidden;
   padding-top: 6px;
   font-style: normal;
   font-weight: 400;
@@ -76,6 +77,10 @@
   line-height: 12px;
   color: #ee3465;
   align-self: flex-end;
+}
+
+.profile__input-error_active {
+  visibility: visible;
 }
 
 .profile__btn {
@@ -102,6 +107,11 @@
 
 .profile__btn:hover {
   opacity: 0.7;
+}
+
+.profile__btn_disabled {
+  color: grey;
+  cursor: not-allowed;
 }
 
 @media screen and (max-width: 768px) {

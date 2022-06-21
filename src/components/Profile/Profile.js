@@ -2,32 +2,41 @@ import React, { useState, useEffect, useContext } from "react";
 import "./Profile.css";
 import Header from "../Header/Header";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { useFormWithValidation } from "../../hooks/useFormValidation";
 
 function Profile({ isLoggedIn, onUpdateUser, signOut }) {
   const currentUser = useContext(CurrentUserContext);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  
+  const { values, handleChange, errors, isValid, resetForm } =
+    useFormWithValidation({});
 
-  const handleChangeName = (event) => {
-    setName(event.target.value);
-  };
+  const [buttonDisabled, setButtonDisabled] = useState(false);
 
-  const handleChangeEmail = (event) => {
-    setEmail(event.target.value);
-  };
-
-  useEffect(() => {
-    setName(currentUser.name);
-    setEmail(currentUser.email);
-  }, [currentUser]);
+  const { name, email } = values;
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    onUpdateUser({ name, email });
-    setName("");
-    setEmail("");
+    onUpdateUser(values);
+    resetForm();
   };
+
+  const handleFocus = (event) => {
+    event.target.select();
+  };
+
+  useEffect(() => {
+    if (currentUser) {
+      resetForm(currentUser, {}, true);
+    }
+  }, [currentUser, resetForm]);
+
+  useEffect(() => {
+    if ((name !== currentUser.name || email !== currentUser.email) && isValid) {
+      setButtonDisabled(true);
+    } else {
+      setButtonDisabled(false);
+    }
+  }, [email, isValid, name, currentUser.email, currentUser.name]);
 
   return (
     <>
@@ -45,12 +54,17 @@ function Profile({ isLoggedIn, onUpdateUser, signOut }) {
                 minLength="2"
                 required
                 value={name || ""}
-                onChange={handleChangeName}
+                onChange={handleChange}
+                onFocus={handleFocus}
               />
               <span
-                className="profile__input-error"
+                className={`profile__input-error ${
+                  !isValid && "profile__input-error_active"
+                }`}
                 id="name-input-error"
-              ></span>
+              >
+                {errors.name}
+              </span>
             </label>
             <label className="profile__label profile__label_type_email">
               E-mail
@@ -60,22 +74,34 @@ function Profile({ isLoggedIn, onUpdateUser, signOut }) {
                 name="email"
                 required
                 value={email || ""}
-                onChange={handleChangeEmail}
+                onChange={handleChange}
+                onFocus={handleFocus}
               />
               <span
-                className="profile__input-error"
+                className={`profile__input-error ${
+                  !isValid && "profile__input-error_active"
+                }`}
                 id="email-input-error"
-              ></span>
+              >
+                {errors.email}
+              </span>
             </label>
           </form>
           <button
-            className="profile__btn profile__btn_edit"
+            className={`profile__btn profile__btn_edit ${
+              !buttonDisabled && "profile__btn_disabled"
+            }`}
             type="submit"
             form="profile"
+            disabled={!buttonDisabled}
           >
             Редактировать
           </button>
-          <button className="profile__btn profile__btn_exit" type="button" onClick={signOut}>
+          <button
+            className="profile__btn profile__btn_exit"
+            type="button"
+            onClick={signOut}
+          >
             Выйти из аккаунта
           </button>
         </div>

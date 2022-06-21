@@ -65,7 +65,12 @@ function Login({ onAuth }) {
             </span>
           </label>
         </form>
-        <button className="login__btn" type="submit" form="login">
+        <button
+          className={`login__btn ${!isValid && 'login__btn_disabled'}`}
+          type="submit"
+          form="login"
+          disabled={!isValid}
+        >
           Войти
         </button>
         <p className="login__link-text">

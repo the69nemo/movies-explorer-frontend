@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Register.css";
 import Logo from "../../images/logo.svg";
 import { Link } from "react-router-dom";
 import { useFormWithValidation } from "../../hooks/useFormValidation";
 
 function Register({ onAuth }) {
-  const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation({});
+  const { values, handleChange, errors, isValid, resetForm } =
+    useFormWithValidation({});
 
-  const {name, email, password} = values
+  const { name, email, password } = values;
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -22,7 +23,7 @@ function Register({ onAuth }) {
           <img className="register__logo" src={Logo} alt="логотип" />
         </Link>
         <h2 className="register__title">Добро пожаловать!</h2>
-        <form className="register__form" onSubmit={handleSubmit} id='register'>
+        <form className="register__form" onSubmit={handleSubmit} id="register">
           <label className="register__label register__label_type_name">
             Имя
             <input
@@ -35,9 +36,13 @@ function Register({ onAuth }) {
               onChange={handleChange}
             />
             <span
-              className={`register__input-error ${!isValid && 'register__input-error_active'}`}
+              className={`register__input-error ${
+                !isValid && "register__input-error_active"
+              }`}
               id="name-input-error"
-            >{errors.name}</span>
+            >
+              {errors.name}
+            </span>
           </label>
 
           <label className="register__label register__label_type_email">
@@ -51,9 +56,13 @@ function Register({ onAuth }) {
               onChange={handleChange}
             />
             <span
-              className={`register__input-error ${!isValid && 'register__input-error_active'}`}
+              className={`register__input-error ${
+                !isValid && "register__input-error_active"
+              }`}
               id="email-input-error"
-            >{errors.email}</span>
+            >
+              {errors.email}
+            </span>
           </label>
 
           <label className="register__label register__label_type_password">
@@ -69,12 +78,21 @@ function Register({ onAuth }) {
               onChange={handleChange}
             />
             <span
-              className={`register__input-error ${!isValid && 'register__input-error_active'}`}
+              className={`register__input-error ${
+                !isValid && "register__input-error_active"
+              }`}
               id="password-input-error"
-            >{errors.password}</span>
+            >
+              {errors.password}
+            </span>
           </label>
         </form>
-        <button className="register__btn" type="submit" form="register">
+        <button
+          className={`register__btn ${!isValid && 'register__btn_disabled'}`}
+          type="submit"
+          form="register"
+          disabled={!isValid}
+        >
           Зарегистрироваться
         </button>
         <p className="register__link-text">

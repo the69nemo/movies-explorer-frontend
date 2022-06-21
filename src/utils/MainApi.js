@@ -1,3 +1,5 @@
+import {MOVIES_URL} from './constants';
+
 class MainApi {
   constructor ({ url }) {
     this._url = url;
@@ -43,14 +45,26 @@ class MainApi {
     .then((res) => this._handleResponse(res));
   }
 
-  postMovies(moviesInfo, token) {
+  postMovies(movie, token) {
     return fetch(`${this._url}/movies`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
       },
-      body: JSON.stringify(moviesInfo)
+      body: JSON.stringify({
+        country: movie.country,
+        director: movie.director,
+        duration: movie.duration,
+        year: movie.year,
+        description: movie.description,
+        image: `${MOVIES_URL}${movie.image.url}`,
+        trailerLink: movie.trailerLink,
+        thumbnail: `${MOVIES_URL}${movie.image.formats.thumbnail.url}`,
+        movieId: movie.id,
+        nameRU: movie.nameRU,
+        nameEN: movie.nameEN,
+      }),
     })
     .then ((res) => this._handleResponse(res));
   }

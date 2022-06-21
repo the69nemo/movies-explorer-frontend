@@ -108,6 +108,11 @@
   opacity: 0.8;
 }
 
+.register__btn_disabled{
+  background-color: grey;
+  cursor: not-allowed;
+}
+
 .register__link-text {
   text-align: center;
   margin: 16px 0 20px;

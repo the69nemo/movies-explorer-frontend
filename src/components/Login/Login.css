@@ -109,6 +109,11 @@
   opacity: 0.8;
 }
 
+.login__btn_disabled{
+  background-color: grey;
+  cursor: not-allowed;
+}
+
 .login__link-text {
   text-align: center;
   margin: 16px 0 20px;
