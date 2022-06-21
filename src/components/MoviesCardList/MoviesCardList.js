@@ -64,7 +64,7 @@ function MoviesCardList({
               onSave={onSave}
               onDelete={onDelete}
               savedMovies={savedMovies}
-              key={movie._id}
+              key={movie.id}
             />
           ))
         ) : (
