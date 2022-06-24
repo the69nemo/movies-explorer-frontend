@@ -5,6 +5,7 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Preloader from "../Preloader/Preloader";
+import { moviesApi } from "../../utils/MoviesApi";
 import { SHORT_DURATION } from "../../utils/constants";
 
 function Movies({
@@ -16,7 +17,7 @@ function Movies({
   onSave,
   onDelete,
   searchKeyword,
-  notFoundMessage
+  setAllMovies
 }) {
   const [checkBoxActive, setCheckBoxActive] = useState(false);
   const [isShort, setIsShort] = useState(false);
@@ -31,6 +32,18 @@ function Movies({
     if (checkBoxLocal === 'true') {
       setIsShort(isShort)
       setCheckBoxActive(true)
+    }
+  }, [])
+
+  useEffect (() => {
+    if (!localStorage.loadedMovies) {
+      moviesApi
+          .getAllMovies()
+          .then((data) => {
+            setAllMovies(data);
+            localStorage.setItem("loadedMovies", JSON.stringify(data));
+          })
+          .catch((err) => console.log(err));
     }
   }, [])
 
@@ -54,7 +67,7 @@ function Movies({
           onDelete={onDelete}
           savedMovies={savedMovies}
           checkBox={checkBoxClick}
-          notFoundMessage={notFoundMessage}
+          searchKeyword={searchKeyword}
         />
       )}
       <Footer />

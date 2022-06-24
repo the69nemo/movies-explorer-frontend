@@ -6,10 +6,10 @@ import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 function SearchForm({ onSubmit, checkBoxClick, searchKeyword, isShort }) {
   const location = useLocation();
 
-  const [movie, setMovies] = useState([]);
+  const [movie, setMovies] = useState('');
 
   useEffect(() => {
-    if (searchKeyword.lenght && location.pathname === "/movies") {
+    if (searchKeyword && location.pathname === "/movies") {
       setMovies(searchKeyword);
     }
   }, []);

@@ -14,7 +14,6 @@ function SaveMovies({
   onDelete,
   savedMovies,
   searchKeyword,
-  notFoundMessage
 }) {
   const [checkBoxActive, setCheckBoxActive] = useState(false);
   const [filter, setFilter] = useState('');
@@ -51,7 +50,6 @@ function SaveMovies({
           }
           onDelete={onDelete}
           savedMovies={savedMovies}
-          notFoundMessage={notFoundMessage}
         />
       )}
       <Footer />

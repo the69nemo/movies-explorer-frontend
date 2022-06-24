@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route, Switch, useHistory } from "react-router-dom";
+import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 import "./App.css";
 import Main from "../Main/Main";
 import PageNotFound from "../PageNotFound/PageNotFound";
@@ -16,12 +16,12 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
   const history = useHistory();
+  const location = useLocation();
   const token = localStorage.getItem("jwt");
 
   const [currentUser, setCurrentUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [notFoundMessage, setNotFoundMessage] = useState("");
   const [allMovies, setAllMovies] = useState(
     JSON.parse(localStorage.getItem("loadedMovies")) || []
   );
@@ -30,10 +30,13 @@ function App() {
   const [filteredMovies, setFilteredMovies] = useState(
     JSON.parse(localStorage.getItem("filteredMovies")) || []
   );
-
   const [searchKeyword, setSearchKeyword] = useState(
     localStorage.getItem("searchKeyword") || ""
   );
+
+  const [profileInfoMessage, setProfileInfoMessage] = useState("");
+  const [registerInfoMessage, setRegisterInfoMessage] = useState("");
+  const [loginInfoMessage, setLoginleInfoMessage] = useState("");
 
   useEffect(() => {
     if (token) {
@@ -41,7 +44,7 @@ function App() {
         .getToken(token)
         .then(() => {
           setIsLoggedIn(true);
-          history.push("/");
+          history.push(location.pathname);
         })
         .catch((err) => console.log(err));
     }
@@ -52,7 +55,9 @@ function App() {
       mainApi
         .getUserInfo(token)
         .then((user) => setCurrentUser(user))
-        .catch((err) => `Ошибка получения данных пользователя: ${err}`);
+        .catch((err) => {
+          console.log(`Ошибка получения данных пользователя: ${err}`);
+        });
 
       mainApi
         .getMovies(token)
@@ -60,16 +65,12 @@ function App() {
           setSavedMovies(res);
           localStorage.setItem("savedMovies", JSON.stringify(res));
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+        });
 
-      if (searchKeyword.length) {
-        moviesApi
-          .getAllMovies()
-          .then((data) => {
-            setAllMovies(data);
-            localStorage.setItem("loadedMovies", JSON.stringify(data));
-          })
-          .catch((err) => console.log(err));
+      if (localStorage.filteredMovies) {
+        setMovies(filteredMovies);
       }
     }
   }, [isLoggedIn, filteredMovies]);
@@ -77,13 +78,27 @@ function App() {
   const handleRegister = ({ name, password, email }) => {
     auth
       .register(name, password, email)
-      .then(() => {
-        handleAutorize({ password, email });
+      .then((res) => {
+        console.log(res);
+        if (res) {
+          setTimeout(() => handleAutorize({ password, email }), 1000);
+          setRegisterInfoMessage("Регистрация прошла успешно");
+        }
       })
       .catch((err) => {
-        return err === 400
-          ? console.log("Ошибка 400 - некорректно заполнено одно из полей")
-          : console.log(`Ошибка ${err}`);
+        console.log(err);
+        switch (err) {
+          case 400:
+            setRegisterInfoMessage("Некорректно заполнено одно из полей");
+            break;
+          case 409:
+            setRegisterInfoMessage(
+              "Пользователь с такой почтой уже зарегистрирован"
+            );
+            break;
+          default:
+            setRegisterInfoMessage("Что-то пошло не так ¯_(ツ)_/¯");
+        }
       });
   };
 
@@ -91,21 +106,29 @@ function App() {
     auth
       .authorize(password, email)
       .then((data) => {
-        auth.getToken(data.token).then(() => {
-          setIsLoggedIn(true);
-          history.push("/movies");
+        auth.getToken(data.token).then((res) => {
+          console.log(res);
+          if (res) {
+            setIsLoggedIn(true);
+            setTimeout(() => history.push("/movies"), 1000);
+            setLoginleInfoMessage("Авторизация прошла успешно");
+          }
         });
       })
       .catch((err) => {
         switch (err) {
           case 400:
-            console.log("Ошибка 400 - не передано одно из полей");
+            setLoginleInfoMessage("Вы ввели неправильный email или пароль");
             break;
           case 401:
-            console.log("Ошибка 401 - пользователь с email не найден ");
+            setLoginleInfoMessage(
+              "При авторизации произошла ошибка. Токен не передан или передан не в том формате."
+            );
             break;
           default:
-            console.log(`Ошибка ${err}`);
+            setLoginleInfoMessage(
+              "При авторизации произошла ошибка. Переданный токен некорректен."
+            );
         }
       });
   };
@@ -114,9 +137,12 @@ function App() {
     mainApi
       .editProfile(user, token)
       .then((userInfo) => {
+        setProfileInfoMessage("Данные пользователя обновлеы успешно");
         setCurrentUser(userInfo);
       })
-      .catch((err) => `Ошибка редактирования данных профиля: ${err}`);
+      .catch((err) => {
+        console.log(`Ошибка редактирования данных профиля: ${err}`);
+      });
   };
 
   function searchMovies(movie, name) {
@@ -133,14 +159,10 @@ function App() {
     setFilteredMovies(newMovies);
     localStorage.setItem("searchKeyword", name);
     setSearchKeyword(name);
-    if (localStorage.getItem("filteredMovies") === "[]") {
-      setNotFoundMessage("По вашему запросу ничего не найдено");
-    }
     setTimeout(() => setIsLoading(false), 1000);
   };
 
   const handleSaveMovie = (movie) => {
-    setIsLoading(true);
     mainApi
       .postMovies(movie, token)
       .then((data) => {
@@ -152,14 +174,10 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-      })
-      .finally(() => {
-        setTimeout(() => setIsLoading(false), 1000);
       });
   };
 
   const handleDeleteMovie = (movie) => {
-    setIsLoading(true);
     const savedMovie = savedMovies.find(
       (item) => item.movieId === movie.movieId
     );
@@ -173,9 +191,6 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-      })
-      .finally(() => {
-        setTimeout(() => setIsLoading(false), 1000);
       });
   };
 
@@ -187,6 +202,16 @@ function App() {
     localStorage.removeItem("loadedMovies");
     localStorage.removeItem("jwt");
     setIsLoggedIn(false);
+    setIsLoading(false);
+    setAllMovies([]);
+    setMovies([]);
+    setSavedMovies([]);
+    setCurrentUser({});
+    setSearchKeyword("");
+    setFilteredMovies([]);
+    setProfileInfoMessage("");
+    setRegisterInfoMessage("");
+    setLoginleInfoMessage("");
     history.push("/");
   };
 
@@ -198,25 +223,30 @@ function App() {
             <Main isLoggedIn={isLoggedIn} />
           </Route>
           <Route path="/signup">
-            <Register onAuth={handleRegister} />
+            <Register
+              onAuth={handleRegister}
+              infoMessage={registerInfoMessage}
+            />
           </Route>
           <Route path="/signin">
-            <Login onAuth={handleAutorize} />
+            <Login onAuth={handleAutorize} infoMessage={loginInfoMessage} />
           </Route>
           <ProtectedRoute
+            exact
             path="/movies"
             component={Movies}
             isLoggedIn={isLoggedIn}
             isLoading={isLoading}
             movies={movies}
-            savedMovies={savedMovies}
             onSubmit={handleSearchMovies}
             onSave={handleSaveMovie}
             onDelete={handleDeleteMovie}
             searchKeyword={searchKeyword}
-            notFoundMessage={notFoundMessage}
+            savedMovies={savedMovies}
+            setAllMovies={setAllMovies}
           />
           <ProtectedRoute
+            exact
             path="/saved-movies"
             component={SavedMovies}
             isLoggedIn={isLoggedIn}
@@ -224,14 +254,15 @@ function App() {
             onDelete={handleDeleteMovie}
             savedMovies={savedMovies}
             searchKeyword={searchKeyword}
-            notFoundMessage={notFoundMessage}
           />
           <ProtectedRoute
+            exact
             path="/profile"
             component={Profile}
             isLoggedIn={isLoggedIn}
             onUpdateUser={handleUpdateUser}
             signOut={signOut}
+            infoMessage={profileInfoMessage}
           />
           <Route path="*">
             <PageNotFound />

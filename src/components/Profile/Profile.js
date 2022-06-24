@@ -4,9 +4,9 @@ import Header from "../Header/Header";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useFormWithValidation } from "../../hooks/useFormValidation";
 
-function Profile({ isLoggedIn, onUpdateUser, signOut }) {
+function Profile({ isLoggedIn, onUpdateUser, signOut, infoMessage }) {
   const currentUser = useContext(CurrentUserContext);
-  
+
   const { values, handleChange, errors, isValid, resetForm } =
     useFormWithValidation({});
 
@@ -87,6 +87,7 @@ function Profile({ isLoggedIn, onUpdateUser, signOut }) {
               </span>
             </label>
           </form>
+          <p className="profile__info-message">{infoMessage}</p>
           <button
             className={`profile__btn profile__btn_edit ${
               !buttonDisabled && "profile__btn_disabled"

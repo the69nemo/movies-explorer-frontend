@@ -2,6 +2,9 @@ import React, { useCallback, useState, useEffect } from "react";
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import { MOBILE_WIDTH } from "../../utils/constants";
+import { useLocation } from "react-router-dom";
+
+import { NOT_FOUND_MESSAGE } from "../../utils/constants";
 
 function MoviesCardList({
   hiddenButton,
@@ -9,8 +12,9 @@ function MoviesCardList({
   onSave,
   onDelete,
   savedMovies,
-  notFoundMessage
+  searchKeyword
 }) {
+  const location = useLocation();
   const [currentCards, setCurrentCards] = useState(0);
   const [addCards, setAddCards] = useState(7);
   const [moviesToShow, setMoviesToShow] = useState([]);
@@ -57,7 +61,7 @@ function MoviesCardList({
   return (
     <section className="movies-list">
       <div className="movies-list__container">
-        {movies.length ? (
+        {location.pathname === "/movies" && movies.length ? (
           moviesToShow.map((movie) => (
             <MoviesCard
               movie={movie}
@@ -68,7 +72,34 @@ function MoviesCardList({
             />
           ))
         ) : (
-          <h2 className="movies-list__not-found-text">{notFoundMessage}</h2>
+          <h2
+            className={`movies-list__not-found-text ${
+              searchKeyword && location.pathname === "/movies" &&
+              "movies-list__not-found-text_visible"
+            }`}
+          >
+            {NOT_FOUND_MESSAGE}
+          </h2>
+        )}
+        {location.pathname === "/saved-movies" && movies.length ? (
+          moviesToShow.map((movie) => (
+            <MoviesCard
+              movie={movie}
+              onSave={onSave}
+              onDelete={onDelete}
+              savedMovies={savedMovies}
+              key={movie._id}
+            />
+          ))
+        ) : (
+          <h2
+            className={`movies-list__not-found-text ${
+              searchKeyword && location.pathname === "/saved-movies" &&
+              "movies-list__not-found-text_visible"
+            }`}
+          >
+            {NOT_FOUND_MESSAGE}
+          </h2>
         )}
       </div>
       <button

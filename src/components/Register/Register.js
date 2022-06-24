@@ -4,7 +4,7 @@ import Logo from "../../images/logo.svg";
 import { Link } from "react-router-dom";
 import { useFormWithValidation } from "../../hooks/useFormValidation";
 
-function Register({ onAuth }) {
+function Register({ onAuth, infoMessage }) {
   const { values, handleChange, errors, isValid, resetForm } =
     useFormWithValidation({});
 
@@ -87,6 +87,7 @@ function Register({ onAuth }) {
             </span>
           </label>
         </form>
+        <p className="register__info-message">{infoMessage}</p>
         <button
           className={`register__btn ${!isValid && 'register__btn_disabled'}`}
           type="submit"
