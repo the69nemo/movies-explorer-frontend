@@ -7,3 +7,5 @@ export const SHORT_DURATION = 40;
 export const MOVIES_URL = 'https://api.nomoreparties.co';
 
 export const NOT_FOUND_MESSAGE = 'По вашему запросу ничего не найдено'
+
+export const NOT_SAVED_MOVIES = 'Список сохраненных фильмов пуст'

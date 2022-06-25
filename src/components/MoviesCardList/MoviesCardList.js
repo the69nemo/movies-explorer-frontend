@@ -4,7 +4,7 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import { MOBILE_WIDTH } from "../../utils/constants";
 import { useLocation } from "react-router-dom";
 
-import { NOT_FOUND_MESSAGE } from "../../utils/constants";
+import { NOT_FOUND_MESSAGE, NOT_SAVED_MOVIES } from "../../utils/constants";
 
 function MoviesCardList({
   movies,
@@ -12,6 +12,7 @@ function MoviesCardList({
   onDelete,
   savedMovies,
   searchKeyword,
+  isNothingFound
 }) {
   const location = useLocation();
   const [currentCards, setCurrentCards] = useState(0);
@@ -101,12 +102,12 @@ function MoviesCardList({
         ) : (
           <h2
             className={`movies-list__not-found-text ${
-              localStorage.searchKeyword &&
+              isNothingFound &&
               location.pathname === "/saved-movies" &&
               "movies-list__not-found-text_visible"
             }`}
           >
-            {NOT_FOUND_MESSAGE}
+            {(savedMovies.length !== 0) ? NOT_FOUND_MESSAGE : NOT_SAVED_MOVIES}
           </h2>
         )}
       </div>

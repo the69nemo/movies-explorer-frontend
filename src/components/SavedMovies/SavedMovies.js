@@ -1,4 +1,4 @@
-import React,{useState, useMemo} from "react";
+import React,{useState, useMemo, useEffect} from "react";
 import "./SavedMovies.css";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
@@ -17,6 +17,7 @@ function SaveMovies({
 }) {
   const [checkBoxActive, setCheckBoxActive] = useState(false);
   const [filter, setFilter] = useState('');
+  const [isNothingFound, setIsNothingFound] = useState(true)
 
   const filterShortMovies = (filterMovies) =>
     filterMovies.filter((m) => m.duration < SHORT_DURATION);
@@ -24,6 +25,12 @@ function SaveMovies({
   function checkBoxClick() {
     setCheckBoxActive(!checkBoxActive);
   }
+
+  useEffect(() => {
+    if (filteredMovies.lenght == 0) {
+      setIsNothingFound(false)
+    }
+  }, [])
 
   const filteredMovies = useMemo(
     () =>
@@ -49,6 +56,7 @@ function SaveMovies({
           }
           onDelete={onDelete}
           savedMovies={savedMovies}
+          isNothingFound={isNothingFound}
         />
       )}
       <Footer />
