@@ -7,17 +7,17 @@ import { useLocation } from "react-router-dom";
 import { NOT_FOUND_MESSAGE } from "../../utils/constants";
 
 function MoviesCardList({
-  hiddenButton,
   movies,
   onSave,
   onDelete,
   savedMovies,
-  searchKeyword
+  searchKeyword,
 }) {
   const location = useLocation();
   const [currentCards, setCurrentCards] = useState(0);
   const [addCards, setAddCards] = useState(7);
   const [moviesToShow, setMoviesToShow] = useState([]);
+  const [hiddenButton, setHiddenButton] = useState(false);
 
   const getCards = (windowSize) => {
     if (windowSize > MOBILE_WIDTH) {
@@ -54,6 +54,12 @@ function MoviesCardList({
     setCurrentCards(count);
   }, [movies]);
 
+  useEffect(() => {
+    if ((currentCards > movies.length) || (currentCards === movies.length)) {
+      setHiddenButton(true);
+    }
+  }, [currentCards]);
+
   const renderMovies = useCallback(() => {
     renderAddCards();
   }, [renderAddCards]);
@@ -74,7 +80,8 @@ function MoviesCardList({
         ) : (
           <h2
             className={`movies-list__not-found-text ${
-              searchKeyword && location.pathname === "/movies" &&
+              searchKeyword &&
+              location.pathname === "/movies" &&
               "movies-list__not-found-text_visible"
             }`}
           >
@@ -94,7 +101,8 @@ function MoviesCardList({
         ) : (
           <h2
             className={`movies-list__not-found-text ${
-              searchKeyword && location.pathname === "/saved-movies" &&
+              searchKeyword &&
+              location.pathname === "/saved-movies" &&
               "movies-list__not-found-text_visible"
             }`}
           >
@@ -102,15 +110,17 @@ function MoviesCardList({
           </h2>
         )}
       </div>
-      <button
-        type="button"
-        onClick={renderMovies}
-        className={
-          !hiddenButton ? "movies-list__button" : "movies-list__button_hidden"
-        }
-      >
-        Еще
-      </button>
+      {location.pathname === "/movies" && (
+        <button
+          type="button"
+          onClick={renderMovies}
+          className={`movies-list__button ${
+            hiddenButton && "movies-list__button_hidden"
+          }`}
+        >
+          Еще
+        </button>
+      )}
     </section>
   );
 }

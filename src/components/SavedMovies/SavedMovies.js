@@ -44,7 +44,6 @@ function SaveMovies({
       {isLoading && <Preloader />}
       {!isLoading && (
         <MoviesCardList
-          hiddenButton
           movies={
             checkBoxActive ? filterShortMovies(filteredMovies) : filteredMovies
           }
