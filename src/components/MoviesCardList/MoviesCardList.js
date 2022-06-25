@@ -101,7 +101,7 @@ function MoviesCardList({
         ) : (
           <h2
             className={`movies-list__not-found-text ${
-              searchKeyword &&
+              localStorage.searchKeyword &&
               location.pathname === "/saved-movies" &&
               "movies-list__not-found-text_visible"
             }`}
