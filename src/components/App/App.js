@@ -9,8 +9,6 @@ import Register from "../Register/Register";
 import Login from "../Login/Login";
 import Profile from "../Profile/Profile";
 import { mainApi } from "../../utils/MainApi";
-import { moviesApi } from "../../utils/MoviesApi";
-import * as auth from "../../utils/auth";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
@@ -40,7 +38,7 @@ function App() {
 
   useEffect(() => {
     if (token) {
-      auth
+      mainApi
         .getToken(token)
         .then(() => {
           setIsLoggedIn(true);
@@ -76,17 +74,15 @@ function App() {
   }, [isLoggedIn, filteredMovies]);
 
   const handleRegister = ({ name, password, email }) => {
-    auth
-      .register(name, password, email)
+    mainApi
+      .registration(name, password, email)
       .then((res) => {
-        console.log(res);
         if (res) {
-          setTimeout(() => handleAutorize({ password, email }), 1000);
+          handleAutorize({ password, email });
           setRegisterInfoMessage("Регистрация прошла успешно");
         }
       })
       .catch((err) => {
-        console.log(err);
         switch (err) {
           case 400:
             setRegisterInfoMessage("Некорректно заполнено одно из полей");
@@ -103,11 +99,10 @@ function App() {
   };
 
   const handleAutorize = ({ password, email }) => {
-    auth
+    mainApi
       .authorize(password, email)
       .then((data) => {
-        auth.getToken(data.token).then((res) => {
-          console.log(res);
+        mainApi.getToken(data.token).then((res) => {
           if (res) {
             setIsLoggedIn(true);
             setTimeout(() => history.push("/movies"), 1000);
@@ -115,22 +110,9 @@ function App() {
           }
         });
       })
-      .catch((err) => {
-        switch (err) {
-          case 400:
-            setLoginleInfoMessage("Вы ввели неправильный email или пароль");
-            break;
-          case 401:
-            setLoginleInfoMessage(
-              "При авторизации произошла ошибка. Токен не передан или передан не в том формате."
-            );
-            break;
-          default:
-            setLoginleInfoMessage(
-              "При авторизации произошла ошибка. Переданный токен некорректен."
-            );
-        }
-      });
+      .catch(() =>
+        setLoginleInfoMessage("Вы ввели неправильный email или пароль")
+      );
   };
 
   const handleUpdateUser = (user) => {
@@ -141,8 +123,10 @@ function App() {
         setCurrentUser(userInfo);
       })
       .catch((err) => {
-        console.log(`Ошибка редактирования данных профиля: ${err}`);
-      });
+        console.log(`ошибка ${err}`)
+        setProfileInfoMessage('Ошибка редактирования данных профиля');
+      })
+      .finally(() => setTimeout(() => setProfileInfoMessage(''), 1500));
   };
 
   function searchMovies(movie, name) {

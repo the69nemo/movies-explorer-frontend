@@ -9,8 +9,47 @@ class MainApi {
     if (res.ok) {
       return res.json();
     } else {
-      return Promise.reject(`Ошибка ${res.status}`)
+      return Promise.reject(res.status)
     }
+  }
+
+  registration (name, password, email) {
+    return fetch(`${this._url}/signup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, password, email }),
+    })
+      .then((res) => this._handleResponse(res));
+  }
+
+  authorize (password, email) {
+    return fetch(`${this._url}/signin`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ password, email }),
+    })
+      .then((res) => this._handleResponse(res))
+      .then((data) => {
+        if (data.token) {
+          localStorage.setItem("jwt", data.token);
+          return data;
+        }
+      });
+  }
+
+  getToken (token) {
+    return fetch(`${this._url}/users/me`, {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization" : `Bearer ${token}`
+      }
+    })
+    .then((res) => this._handleResponse(res))
   }
 
   getUserInfo (token) {
