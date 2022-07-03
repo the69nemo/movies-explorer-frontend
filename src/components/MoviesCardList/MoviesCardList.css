@@ -29,6 +29,18 @@
   opacity: 0.8;
 }
 
+.movies-list__not-found-text {
+  visibility: hidden;
+  margin: 0;
+  text-align: center;
+  font-size: 15px;
+  color: #2be080;
+}
+
+.movies-list__not-found-text_visible {
+  visibility: visible;
+}
+
 @media screen and (max-width: 768px) {
   .movies-list {
     padding: 0 30px;

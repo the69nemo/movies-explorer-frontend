@@ -1,52 +1,259 @@
-import React, { useState } from "react";
-import { Route, Switch } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 import "./App.css";
 import Main from "../Main/Main";
 import PageNotFound from "../PageNotFound/PageNotFound";
 import Movies from "../Movies/Movies";
-import SaveMovies from "../SavedMovies/SavedMovies";
+import SavedMovies from "../SavedMovies/SavedMovies";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
 import Profile from "../Profile/Profile";
+import { mainApi } from "../../utils/MainApi";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const history = useHistory();
+  const location = useLocation();
+  const token = localStorage.getItem("jwt");
 
+  const [currentUser, setCurrentUser] = useState({});
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [allMovies, setAllMovies] = useState(
+    JSON.parse(localStorage.getItem("loadedMovies")) || []
+  );
+  const [movies, setMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState(
+    JSON.parse(localStorage.getItem("filteredMovies")) || []
+  );
+  const [searchKeyword, setSearchKeyword] = useState(
+    localStorage.getItem("searchKeyword") || ""
+  );
+
+  const [profileInfoMessage, setProfileInfoMessage] = useState("");
+  const [registerInfoMessage, setRegisterInfoMessage] = useState("");
+  const [loginInfoMessage, setLoginleInfoMessage] = useState("");
+
+  useEffect(() => {
+    if (token) {
+      mainApi
+        .getToken(token)
+        .then(() => {
+          setIsLoggedIn(true);
+          history.push(location.pathname);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      mainApi
+        .getUserInfo(token)
+        .then((user) => setCurrentUser(user))
+        .catch((err) => {
+          console.log(`Ошибка получения данных пользователя: ${err}`);
+        });
+
+      mainApi
+        .getMovies(token)
+        .then((res) => {
+          setSavedMovies(res);
+          localStorage.setItem("savedMovies", JSON.stringify(res));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      if (localStorage.filteredMovies) {
+        setMovies(filteredMovies);
+      }
+    }
+  }, [isLoggedIn, filteredMovies]);
+
+  const handleRegister = ({ name, password, email }) => {
+    mainApi
+      .registration(name, password, email)
+      .then((res) => {
+        if (res) {
+          handleAutorize({ password, email });
+          setRegisterInfoMessage("Регистрация прошла успешно");
+        }
+      })
+      .catch((err) => {
+        switch (err) {
+          case 400:
+            setRegisterInfoMessage("Некорректно заполнено одно из полей");
+            break;
+          case 409:
+            setRegisterInfoMessage(
+              "Пользователь с такой почтой уже зарегистрирован"
+            );
+            break;
+          default:
+            setRegisterInfoMessage("Что-то пошло не так ¯_(ツ)_/¯");
+        }
+      });
+  };
+
+  const handleAutorize = ({ password, email }) => {
+    mainApi
+      .authorize(password, email)
+      .then((data) => {
+        mainApi.getToken(data.token).then((res) => {
+          if (res) {
+            setIsLoggedIn(true);
+            setTimeout(() => history.push("/movies"), 1000);
+            setLoginleInfoMessage("Авторизация прошла успешно");
+          }
+        });
+      })
+      .catch(() =>
+        setLoginleInfoMessage("Вы ввели неправильный email или пароль")
+      );
+  };
+
+  const handleUpdateUser = (user) => {
+    mainApi
+      .editProfile(user, token)
+      .then((userInfo) => {
+        setProfileInfoMessage("Данные пользователя обновлеы успешно");
+        setCurrentUser(userInfo);
+      })
+      .catch((err) => {
+        console.log(`ошибка ${err}`)
+        setProfileInfoMessage('Ошибка редактирования данных профиля');
+      })
+      .finally(() => setTimeout(() => setProfileInfoMessage(''), 1500));
+  };
+
+  function searchMovies(movie, name) {
+    return movie.filter((m) =>
+      m.nameRU.toLowerCase().includes(name.toLowerCase())
+    );
+  }
+
+  const handleSearchMovies = (name) => {
+    setIsLoading(true);
+    const newMovies = searchMovies(allMovies, name);
+    setMovies(newMovies);
+    localStorage.setItem("filteredMovies", JSON.stringify(newMovies));
+    setFilteredMovies(newMovies);
+    localStorage.setItem("searchKeyword", name);
+    setSearchKeyword(name);
+    setTimeout(() => setIsLoading(false), 1000);
+  };
+
+  const handleSaveMovie = (movie) => {
+    mainApi
+      .postMovies(movie, token)
+      .then((data) => {
+        setSavedMovies([data, ...savedMovies]);
+        localStorage.setItem(
+          "savedMovies",
+          JSON.stringify([data, ...savedMovies])
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleDeleteMovie = (movie) => {
+    const savedMovie = savedMovies.find(
+      (item) => item.movieId === movie.movieId
+    );
+    mainApi
+      .deleteMovies(savedMovie._id, token)
+      .then(() => {
+        const newMoviesList = savedMovies.filter(
+          (item) => item._id !== savedMovie._id
+        );
+        setSavedMovies(newMoviesList);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const signOut = () => {
+    localStorage.removeItem("checkBox");
+    localStorage.removeItem("searchKeyword");
+    localStorage.removeItem("filteredMovies");
+    localStorage.removeItem("savedMovies");
+    localStorage.removeItem("loadedMovies");
+    localStorage.removeItem("jwt");
+    setIsLoggedIn(false);
+    setIsLoading(false);
+    setAllMovies([]);
+    setMovies([]);
+    setSavedMovies([]);
+    setCurrentUser({});
+    setSearchKeyword("");
+    setFilteredMovies([]);
+    setProfileInfoMessage("");
+    setRegisterInfoMessage("");
+    setLoginleInfoMessage("");
+    history.push("/");
+  };
 
   return (
-    <div className="page">
-      <Switch>
-        <Route path="/signup">
-          <Register />
-        </Route>
-        <Route path="/signin">
-          <Login />
-        </Route>
-        <Route path="/profile">
-          <Profile
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="page">
+        <Switch>
+          <Route path="/" exact>
+            <Main isLoggedIn={isLoggedIn} />
+          </Route>
+          <Route path="/signup">
+            <Register
+              onAuth={handleRegister}
+              infoMessage={registerInfoMessage}
+            />
+          </Route>
+          <Route path="/signin">
+            <Login onAuth={handleAutorize} infoMessage={loginInfoMessage} />
+          </Route>
+          <ProtectedRoute
+            exact
+            path="/movies"
+            component={Movies}
             isLoggedIn={isLoggedIn}
+            isLoading={isLoading}
+            movies={movies}
+            onSubmit={handleSearchMovies}
+            onSave={handleSaveMovie}
+            onDelete={handleDeleteMovie}
+            searchKeyword={searchKeyword}
+            savedMovies={savedMovies}
+            setAllMovies={setAllMovies}
           />
-        </Route>
-        <Route path="/" exact>
-          <Main
+          <ProtectedRoute
+            exact
+            path="/saved-movies"
+            component={SavedMovies}
             isLoggedIn={isLoggedIn}
+            isLoading={isLoading}
+            onDelete={handleDeleteMovie}
+            savedMovies={savedMovies}
+            searchKeyword={searchKeyword}
           />
-        </Route>
-        <Route path="/movies">
-          <Movies
+          <ProtectedRoute
+            exact
+            path="/profile"
+            component={Profile}
             isLoggedIn={isLoggedIn}
+            onUpdateUser={handleUpdateUser}
+            signOut={signOut}
+            infoMessage={profileInfoMessage}
           />
-        </Route>
-        <Route path="/saved-movies">
-          <SaveMovies
-            isLoggedIn={isLoggedIn}
-          />
-        </Route>
-        <Route path="*">
-          <PageNotFound />
-        </Route>
-      </Switch>
-    </div>
+          <Route path="*">
+            <PageNotFound />
+          </Route>
+        </Switch>
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 
